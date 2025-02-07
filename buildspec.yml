@@ -32,6 +32,8 @@ phases:
       - python -m pip install --upgrade --force pip
       - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
       - sudo apt-key del A122542AB04F24E3
+      - grep -r 'apt.corretto.aws' /etc/apt/sources.list /etc/apt/sources.list.d/
+      - sudo rm -f /etc/apt/sources.list.d/corretto.list
       - curl -fsSL https://apt.corretto.aws/corretto.key | sudo tee /usr/share/keyrings/corretto-key.gpg > /dev/null
       - echo "deb [signed-by=/usr/share/keyrings/corretto-key.gpg] https://apt.corretto.aws stable main" | sudo tee /etc/apt/sources.list.d/corretto.list
       - apt-get update && apt-get -y install jq  && pip install --upgrade awscli pytest
